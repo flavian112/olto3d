@@ -3,7 +3,7 @@ import numpy as np
 
 s = 0.3
 
-org = cv2.imread('ol_karte2.jpg')
+org = cv2.imread('mapdata/map1.jpg')
 img = cv2.resize(org, (0, 0), fx=1, fy=1)
 gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 blur = cv2.GaussianBlur(gray,(5,5),0)
