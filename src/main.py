@@ -3,7 +3,7 @@ import numpy as np
 from LoadImg import *
 
 MAPS_PATH = "../ressources/maps/"
-MAP_PATH = MAPS_PATH + "map3.jpg"
+MAP_PATH = MAPS_PATH + "map1.jpg"
 
 img = loadImg(MAP_PATH)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -38,6 +38,18 @@ grayBGR = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
 cv2.drawContours(blank_image, filtered_contours, -1, (255,255,255), 5)
 
 
-cv2.imshow("Map", cv2.resize(blank_image, (0,0), fx=0.3, fy=0.3))
+
+checkpoint_cascade = cv2.CascadeClassifier('../ressources/cascades/cascade_checkpoint2_10.xml')
+checkpoints = checkpoint_cascade.detectMultiScale(gray, 1.5, 5)
+print(len(checkpoints))
+for (x,y,w,h) in checkpoints:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+
+
+
+
+
+#cv2.imshow("Map", cv2.resize(blank_image, (0,0), fx=0.3, fy=0.3))
+cv2.imshow("Map", cv2.resize(img, (0,0), fx=0.3, fy=0.3))
 cv2.waitKey(0)
 cv2.destroyAllWindows()
