@@ -9,7 +9,6 @@ name = "pypi"
 python_version = "3.6.5"
 
 [packages]
-numpy = "*"
-matplotlib = "*"
-opencv-python = "*"
-gdal = "2.1.3"
+numpy = "==1.15.0"
+matplotlib = "==2.2.3"
+opencv-python = "==3.4.2.17"
