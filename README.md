@@ -9,7 +9,8 @@ Converting a orienteering sprint map to a 3d format
 * `cd "project dir (olto3d)"`
 * `pyenv init`
 * `pyenv install 3.6.5`
-* `pyenv use  3.6.5`
+* `pyenv local  3.6.5`
 * `python -m pip install pipenv`
 * `pipenv install`
-* `pipenv run "python file"`
+* `pipenv run "python file"` / `pipenv shell` -> `python "python
+  file"`

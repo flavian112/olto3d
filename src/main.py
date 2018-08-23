@@ -62,11 +62,14 @@ image, contours, hierarchy = cv2.findContours(skel,cv2.RETR_TREE,cv2.CHAIN_APPRO
 
 
 
-filtered_contours = list(filter(lambda x: len(x) > 10, contours))#[:100]
+filtered_contours = list(filter(lambda x: len(x) > 0, contours))#[:100]
+filtered_contours.sort(key=len, reverse=True)
+
+
 
 grayBGR = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-cv2.drawContours(blank_image, filtered_contours, -1, (255, 255, 255), thickness=3)
-print(len(filtered_contours))
+cv2.drawContours(blank_image, filtered_contours[:100], -1, (255, 255, 255), thickness=3)
+
 
 
 
@@ -115,10 +118,16 @@ hull = cv2.convexHull(np.array(points))
 
 
 
-#ds = np.zeros((len(contours_endpoints)**2))
-for i, endpoints in enumerate(contours_endpoints[:200]):
-    bx, by = endpoints[0][0], endpoints[0][1]
-    ex, ey = endpoints[1][0], endpoints[1][1]
+
+for i, endpoints1 in enumerate(reversed(contours_endpoints)):
+    d = 1000000
+    b1x, b1y = endpoints1[0][0], endpoints1[0][1]
+    e1x, e1y = endpoints1[1][0], endpoints1[1][1]
+    for j, endpoints2 in enumerate(contours_endpoints):
+        b1x, b1y = endpoints2[0][0], endpoints2[0][1]
+        e1x, e1y = endpoints2[1][0], endpoints2[1][1]
+        #cd = dist()
+
 
 
 
@@ -134,7 +143,7 @@ for i, endpoints in enumerate(contours_endpoints[:200]):
 
 
 
-cv2.imshow("Skel", cv2.resize(grayBGR, (0,0), fx=0.3, fy=0.3))
+cv2.imshow("Skel", cv2.resize(blank_image, (0,0), fx=0.3, fy=0.3))
 
 #cv2.imshow("Contours", cv2.resize(dilation, (0,0), fx=0.3, fy=0.3))
 #cv2.imshow("Mask", cv2.resize(mask3, (0,0), fx=0.3, fy=0.3))
