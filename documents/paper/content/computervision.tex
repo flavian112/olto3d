@@ -1,0 +1,48 @@
+\section{Computer Vision}
+
+Wir Menschen haben kaum Schwierigkeiten die Welt um uns herum zu Verarbeiten. Sei es ein Haus, ein Auto oder eine OL-Karte, wir erkennen ohne Problem, um was es sich dabei handelt, oder wie wir etwas zu interpretieren haben. Für einen Computer ist diese Aufgabe jedoch nicht selbstverständlich. Es wurde jedoch eine Vielfalt von Verfahren entwickelt, damit ein Computer fähig ist, anhand von digitalen Bildern, Entscheidungen zu treffen, dreidimensionale Räume zu rekonstruieren oder auch Bilder wieder  weiterzuverarbeiten. Diese Prozesse sind aber nicht trivial. In der Computersprache werden Bilder als Zahlenraster repräsentiert. Dabei entsprechen die einzelnen Werte den Farbtönen der dazugehörenden Pixels (Siehe Abbildung \ref{fig:rasterimg}). \cite{computervision_szeliski:1, opencv_bradski_kaehler:1} Computer Vision beruht zum Beispiel darauf, diese Raster bzw. Matrizen mithilfe von mathematischen Operationen weiterzuverarbeiten.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=0.8\textwidth]{\img rasterimg.jpg}
+	\caption{Rasterbild}
+	\label{fig:rasterimg}
+\end{figure}
+
+
+\subsection{OpenCV}
+
+Die Verarbeitung von visuellen Daten am Computer ist weit verbreitet und findet in vielen Sparten der Informatik seine Anwendungen. Um Projekte, welche das Verlangen von Computer Vision haben, zu realisieren, ist eine Mehrzahl von Bibliotheken vorhanden, eine davon OpenCV \cite{opencv:1}. OpenCV ist eine open source Bibliothek, die primär in C und C++ geschrieben wurde. Es sind jedoch APIs auf verschiedenen Entwicklungsplattformen und Programmiersprachen erhältlich. Dazu gehören iOS, Python, etc. \cite{opencv_bradski_kaehler:1}
+
+
+
+\subsection{Anwendungen}
+
+\subsubsection{Bilder entschärfen (Image smoothing)}
+
+Zu den häufigst angewendeten Bildbearbeitungsalgorithmen gehören Entschärfungen. Diese werden vor allem zum Entfernen von Bildrauschen angewendet. Dabei wird jedes neue Pixel $g(i,j)$ mit einem gewichteten Durchschnitt des alten Pixels und dessen darumlegenden berechnet. Dies wird auch als linearer Filter (\ref{eq:linearfilter}) bezeichnet. \cite{opencv_bradski_kaehler:1, opencv_doc_blur:1}
+
+\begin{equation}
+	g(i,j) = \sum_{k,l} f(i+k,j+l)h(k,l)
+	\label{eq:linearfilter}
+\end{equation}
+\cite{opencv_doc_blur:1}
+
+Die Koeffizienten der Gewichtungen werden mit einer Matrize (auch Kernel genannt) $h(k,l)$ beschrieben. Ein solcher Kernel kann wie folgt (\ref{eq:kernelexample}) aussehen. Dies jedoch einer der einfachsten linearen Filter und würde lediglich das arithmetische Mittel der benachbarten Pixel berechnen.
+
+\begin{equation}
+	h(k,l) = \frac{1}{k \cdot l}
+	\begin{bmatrix}
+  	1      & 1      & 1      & \dots  &      1 \\
+    1      & 1      & 1      & \dots  &      1 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    1      & 1      & 1      & \dots  &      1
+	\end{bmatrix}	
+	\label{eq:kernelexample}
+\end{equation}
+\cite{opencv_doc_blur:1}
+
+In der Praxis gibt es geeignetere Filter, um eine gewünschte Bildrausch Reduzierung zu erlangen. Einer der bekannteren wäre der Gaussian Blur, welcher die statistische Normalverteilung bzw. Gauss-Verteilung verwendet, um ein Mittel zu berechnen, benannt nach dem Mathematiker Carl Friedrich Gauss. \cite{carlfriedrichgauss:1}
+
+\subsubsection{Kantenerkennung (Edge detection)}
+

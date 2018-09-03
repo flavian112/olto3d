@@ -1,0 +1,87 @@
+% Document setup
+\documentclass[12pt, twoside, german]{article}
+\usepackage[a4paper, width=150mm, top=25mm, bottom=25mm, bindingoffset=6mm]{geometry} % Set bezels
+
+\include{paths} % Include document paths
+
+
+% Packages
+\usepackage{makeidx} % Indexing words
+\usepackage{verbatim} % Force to print what you type
+
+
+\usepackage[ngerman]{babel} % Needed for correct "Umlaut" encoding
+\usepackage[utf8]{inputenc} % Needed for correct "Umlaut" encoding
+\usepackage[T1]{fontenc} % Needed for correct "Umlaut" encoding
+
+\usepackage{fancyhdr} % Custom headers and footers
+\usepackage{lastpage} % Calculate number of pages
+
+\usepackage{graphicx} % Insert graphics
+\usepackage{listings}
+
+
+\usepackage[hidelinks]{hyperref} % Hyperlinks
+\usepackage{xcolor} % Color
+
+
+\usepackage{cite} % Bibliography
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\newlength{\swidth}
+\setlength{\swidth}{0.6\textwidth}
+
+\usepackage{amsmath} % Math package
+
+% Font
+%\renewcommand{\familydefault}{\ttdefault}
+
+% Set properties
+\title{olto3d}
+\author{Flavian Kaufmann}
+\date{\today{}}
+
+\makeatletter
+\let\mytitle\@title
+\let\myauthor\@author
+\let\mydate\@date
+\makeatother
+
+
+% Header and Footer
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[LE,RO]{\myauthor}
+\fancyhead[CE,CO]{\mydate}
+\fancyhead[RE,LO]{\mytitle}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[LE,RO]{\thepage/\pageref{LastPage}}
+
+% Document
+\begin {document}
+
+	% Titlepage
+
+	\include{\pre titlepage}
+
+	\tableofcontents % Prints TOC
+
+	% Document outline
+	
+	\include{\con introduction}
+	\include{\con computervision}
+	\include{\con data}
+	\include{\con 3d}
+	\include{\con results}
+
+	% Prints bibliography and figs
+
+	\bibliography{sources}{}
+	\bibliographystyle{plain}
+	\listoffigures
+	
+\end{document}
