@@ -61,9 +61,32 @@ image, contours, hierarchy = cv2.findContours(skel,cv2.RETR_TREE,cv2.CHAIN_APPRO
 
 
 
+#cv2.imshow("IMG", cv2.resize(skel, (0,0), fx=0.3, fy=0.3))
+#cv2.waitKey(0)
 
-filtered_contours = list(filter(lambda x: len(x) > 0, contours))#[:100]
+filtered_contours = list(filter(lambda x: len(x) > 2, contours))#[:100]
 filtered_contours.sort(key=len, reverse=True)
+
+contourmask = blank_image.copy()
+
+cv2.drawContours(contourmask, filtered_contours, -1, (255, 255, 255), 1)
+
+
+linemask = blank_image.copy()
+dd = 10
+
+for i in range(skel.shape[0] // dd):
+    i *= 10
+
+    cv2.line(linemask, (0,i), (skel.shape[0],i), (255,255,255), thickness=1)
+    #for c in filtered_contours:
+
+intersectionmask = cv2.bitwise_and(linemask, contourmask)
+
+cv2.imshow("IMG", intersectionmask)
+cv2.waitKey(0)
+
+
 
 
 
@@ -119,13 +142,13 @@ hull = cv2.convexHull(np.array(points))
 
 
 
-for i, endpoints1 in enumerate(reversed(contours_endpoints)):
-    d = 1000000
-    b1x, b1y = endpoints1[0][0], endpoints1[0][1]
-    e1x, e1y = endpoints1[1][0], endpoints1[1][1]
-    for j, endpoints2 in enumerate(contours_endpoints):
-        b1x, b1y = endpoints2[0][0], endpoints2[0][1]
-        e1x, e1y = endpoints2[1][0], endpoints2[1][1]
+#for i, endpoints1 in enumerate(reversed(contours_endpoints)):
+#    d = 1000000
+#    b1x, b1y = endpoints1[0][0], endpoints1[0][1]
+#    e1x, e1y = endpoints1[1][0], endpoints1[1][1]
+#    for j, endpoints2 in enumerate(contours_endpoints):
+#        b1x, b1y = endpoints2[0][0], endpoints2[0][1]
+#        e1x, e1y = endpoints2[1][0], endpoints2[1][1]
         #cd = dist()
 
 
@@ -143,9 +166,9 @@ for i, endpoints1 in enumerate(reversed(contours_endpoints)):
 
 
 
-cv2.imshow("Skel", cv2.resize(blank_image, (0,0), fx=0.3, fy=0.3))
+#cv2.imshow("Skel", cv2.resize(blank_image, (0,0), fx=0.3, fy=0.3))
 
 #cv2.imshow("Contours", cv2.resize(dilation, (0,0), fx=0.3, fy=0.3))
 #cv2.imshow("Mask", cv2.resize(mask3, (0,0), fx=0.3, fy=0.3))
-cv2.waitKey(0)
+#cv2.waitKey(0)
 cv2.destroyAllWindows()
