@@ -6,16 +6,14 @@ name = "pypi"
 
 
 [requires]
-python_version = "*"
+python_version = "3.6.5"
 
 [packages]
-numpy = "*"
-matplotlib = "*"
-opencv-python = "*"
-jupyter = "*"
+numpy = "==1.15.0"
+matplotlib = "==2.2.3"
+opencv-python = "==3.4.2.17"
+jupyter = "==1.0.0"
 ipykernel = "*"
 pycollada = "*"
 solidpython = "*"
 viewscad = "*"
-bpy = "*"
-future-fstrings = "*"
