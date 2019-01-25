@@ -8,6 +8,18 @@ Larry Freeman.
   Jun 2005.
 \newblock Besucht am 3. Sep 2018.
 
+\bibitem{googlemaps:1}
+Google.
+\newblock Google maps.
+\newblock \url{https://www.google.ch/maps}, 2019.
+\newblock Besucht am 25. Jan 2019.
+
+\bibitem{openstreetmap:1}
+Openstreetmap.
+\newblock Osm api v0.6.
+\newblock \url{https://wiki.openstreetmap.org/wiki/API_v0.6}, Dez 2019.
+\newblock Besucht am 25. Jan 2019.
+
 \bibitem{computervision_szeliski:1}
 Richard {Szeliski}.
 \newblock {\em Computer Vision - Algorithms and Application}, pages 3--15.
@@ -29,7 +41,8 @@ OpenCV Team.
 
 \bibitem{opencv_bradski_kaehler:1}
 Gary~{Bradski} und Adrian~{Kaehler}.
-\newblock {\em Learning OpenCV - Computer Vision with the OpenCV Library}.
+\newblock {\em Learning OpenCV - Computer Vision with the OpenCV Library},
+  pages 2--7.
 \newblock O'REILLY, 2008.
 
 \end{thebibliography}

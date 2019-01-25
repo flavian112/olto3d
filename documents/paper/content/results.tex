@@ -2,6 +2,62 @@
 
 \subsection{Probleme}
 
+Während dem Verarbeiten und der Erstellung des 3D-Modells sind immer wieder Hürden aufgetaucht. Zum Teil konnten diese Hindernisse umgangen werden, jedoch gab es auch Probleme, zu denen noch keine Lösungen gefunden wurden. In den folgenden Abschnitten werden die schwierigsten Probleme besprochen, sowie allfällige Lösungen und Lösungsansätze diskutiert.
+
+\subsubsection{Isolinien Erkennung}
+
+\begin{wrapfigure}[17]{R}{0.3\textwidth}
+	\centering
+	\includegraphics[width=0.25\textwidth]{\img photoresolutionexamplesidebyside.jpg}
+	\caption{Photoaufnahme Auflösung Vergleich, oben: 50x50, unten 200x200}
+	\label{fig:photoexample}
+\end{wrapfigure}
+
+Eine der Hauptschwierigkeiten war die Erkennung der Isolinien (Höhenkurven). Gründe dafür sind zum einen die nicht perfekten Photoaufnahmen der OL-Karten selbst (Siehe Abbildung \ref{fig:photoexample}). Zum Teil kann dies aber behoben werden, in dem man eine Kamera mit höherer Auflösung verwendet, oder man einen Scanner benutzt. Ausserdem muss man beachten, dass die meisten Photoaufnahmegeräte die Auflösung und Qualität eines Bildes automatisch verringern, um dessen Dateigrössen zu minimieren. Dies kann jedoch häufig in den Einstellung des jeweiligen Gerätes verstellt oder ausgeschalten werden. Für dieses Projekt wurden die OL-Karten mit einem Scanner digitalisiert und danach als JPEG (Bilddateiformat) mit einer Auflösung von 2408x3436 Pixel abgespeichert. 
+
+
+
+Eine weitere Ursache ist, dass die Höhenkurven auf den OL-Karten durch Flüsse und Bäche, sowie Strassen und Wege unterbrochen werden. Dies führt zu einer Zerstückelung dieser Linien (Siehe Abbildung \ref{fig:courvecompare}). Um ein Relief erstellen zu können, ist jedoch wichtig, dass die Isolinien jeweils in einem Stück sind. Zur Zeit hat sich noch keine konkrete Lösung dieses Problems gefunden. 
+
+\newpage
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=1\textwidth]{\img sidebysidecontourexample.png}
+	\caption{Höhenkurven Zerstückelung Vergleich, links: Höhenkurven, rechts: Original}
+	\label{fig:courvecompare}
+\end{figure}
+
+\begin{wrapfigure}{L}{0.4\textwidth}
+	\centering
+	\includegraphics[width=0.35\textwidth]{\img GradientExampleCourves.jpg}
+	\caption{Gradienten Lösungsansatz}
+	\label{fig:gradientexample}
+\end{wrapfigure}
+
+Eine Möglichkeit wäre aber, vom Bildrand aus Senkrechten bis zum ersten Linienabschnitt zu ziehen und dann von dort aus wieder eine Senkrechte zum nächsten Abschnitt zu berechnen, usw. Somit könnte man einen Gradienten konstruieren, um von diesem aus auf ein Höhendiagramm zu kommen.
+
+Noch eine Option wäre, mit Hilfe von externen Daten ein Höhendiagramm zu erlangen. Dazu gäbe es zum Beispiel Openstreetmap \cite{openstreetmap:1}. Dies ist ein online Karten Service wie Google Maps  \cite{googlemaps:1}, welcher aber eine online API zur verfügung stellt um Kartendaten wie, Höhenkurven herunterzuladen. Dazu müsste man aber wissen, was die genaue Geolocation (Koordinaten) der OL-Karte ist.
+
+
+\begin{wrapfigure}{R}{0.4\textwidth}
+	\centering
+	\includegraphics[width=0.35\textwidth]{\img curvestoheightmap.jpg}
+	\caption{Höhendiagramm aus Höhenkurven}
+	\label{fig:curvestoheightmap}
+\end{wrapfigure}
+
+\newpage
+
+Sobald man die Isolinien in einem Stück hat, kann man ein Höhendiagramm anfertigen. Zum Testen wurden ein paar Kurven gezeichnet und als JPEG gespeichert, welche dann erfolgreich vom Programm erkannt wurden und dann in ein Höhendiagramm verarbeitet werden konnten (Siehe Abbildung \ref{fig:curvestoheightmap}). Dies ist nur ein Beispiel, zum zeigen, dass dies überhaupt möglich ist (proof of concept).
+
+\newpage
+
+
+
+
+
+
 \subsection{Diskussion}
 
 \subsection{Wie weiter?}
