@@ -9,7 +9,7 @@ Larry Freeman.
 \newblock Besucht am 3. Sep 2018.
 
 \bibitem{googlemaps:1}
-Google.
+Google Inc.
 \newblock Google maps.
 \newblock \url{https://www.google.ch/maps}, 2019.
 \newblock Besucht am 25. Jan 2019.
@@ -23,6 +23,11 @@ Openstreetmap.
 \bibitem{computervision_szeliski:1}
 Richard {Szeliski}.
 \newblock {\em Computer Vision - Algorithms and Application}, pages 3--15.
+\newblock Springer, 2011.
+
+\bibitem{computervision_szeliski:2}
+Richard {Szeliski}.
+\newblock {\em Computer Vision - Algorithms and Application}, pages 210--230.
 \newblock Springer, 2011.
 
 \bibitem{opencv:1}

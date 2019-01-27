@@ -12,7 +12,7 @@ Wir Menschen haben kaum Schwierigkeiten die Welt um uns herum zu Verarbeiten. Se
 
 \subsection{OpenCV}
 
-Die Verarbeitung von visuellen Daten am Computer ist weit verbreitet und findet in vielen Sparten der Informatik seine Anwendungen. Um Projekte, welche das Verlangen von Computer Vision haben, zu realisieren, ist eine Mehrzahl von Bibliotheken vorhanden, eine davon OpenCV \cite{opencv:1}. OpenCV ist eine open source Bibliothek, die primär in C und C++ geschrieben wurde. Es sind jedoch APIs auf verschiedenen Entwicklungsplattformen wie iOS oder Windows erhältlich. Zudem kann die Bibliothek auch mit den meisten aller häufigst gebrauchten Programmiersprachen wie Python, Java, etc. verwendet werden. \cite{opencv_bradski_kaehler:1}
+Die Verarbeitung von visuellen Daten am Computer ist weit verbreitet und findet in vielen Sparten der Informatik seine Anwendungen. Um Projekte, welche das Verlangen von Computer Vision haben, zu realisieren, ist eine Mehrzahl von Bibliotheken vorhanden, eine davon OpenCV \cite{opencv:1}. OpenCV ist eine open source Bibliothek, die primär in C und C++ geschrieben wurde. Es sind jedoch APIs auf verschiedenen Entwicklungsplattformen wie iOS oder Windows erhältlich. Zudem kann die Bibliothek auch mit den meisten aller häufigst gebrauchten Programmiersprachen wie Python, Java, etc. verwendet werden. Diese Bibliothek stellt diverse Funktionen zur Verfügung, welche mit Bildverarbeitung, Bilderkennung, Machine Learning und vieles mehr zu tun haben.\cite{opencv_bradski_kaehler:1}
 
 
 
@@ -20,10 +20,10 @@ Die Verarbeitung von visuellen Daten am Computer ist weit verbreitet und findet 
 
 \subsubsection{Bilder entschärfen (Image smoothing)}
 
-Zu den häufigst angewendeten Bildbearbeitungsalgorithmen gehören Entschärfungen. Diese werden vor allem zum Entfernen von Bildrauschen angewendet. Unter Bildrauschen versteht man Abweichungen und Störungen der Farbwerte der Pixels eines digitalen Bildes im Vergleich zur Realität. Diese Störungen entstehen hauptsächlich bei Aufnahmen unterbelichteten Bilder oder bei der digitalen Kompression eines Bildes, um dessen Dateigrösse zu vermindern. Um diese Farbabweichungen wieder herzustellen, dh. zu interpolieren, wird jedes neu zu berechnende Pixel $g(i,j)$ mit einem gewichteten Durchschnitt des alten Pixels und dessen darumlegenden berechnet. Dies wird auch als linearer Filter (\ref{eq:linearfilter}) bezeichnet. Die Koeffizienten der Gewichtungen werden mit einer Matrize (auch Kernel genannt) $h(k,l)$ beschrieben. Ein solcher Kernel kann wie folgt (\ref{eq:kernelexample}) aussehen. Dies ist jedoch einer der einfachsten linearen Filter und würde lediglich das arithmetische Mittel der benachbarten Pixel berechnen.  \cite{opencv_bradski_kaehler:1, opencv_doc_blur:1}
+Zu den häufigst angewendeten Bildverarbeitungsalgorithmen gehören Entschärfungen. Diese werden vor allem zum Entfernen von Bildrauschen angewendet. Unter Bildrauschen versteht man Abweichungen und Störungen der Farbwerte der Pixels eines digitalen Bildes im Vergleich zur Realität. Diese Störungen entstehen hauptsächlich bei Aufnahmen unterbelichteten Bilder oder bei der digitalen Kompression eines Bildes, um dessen Dateigrösse zu vermindern. Um diese Farbabweichungen wieder herzustellen, dh. zu interpolieren, wird jedes neu zu berechnende Pixel $g(i,j)$ mit einem gewichteten Durchschnitt des alten Pixels und dessen darumlegenden berechnet. Die Variablen $i$ und $j$ der Funktion $g(i,j)$ sind ganzzahlige Laufvariablen und werden von $0$ bis zur Bildhöhe bzw. -breite hinaufgezählt. Mit der Funktion $f(i,j)$ werden die alten Pixelwerte (bevor der Durchführung der Bildentschärfung) für die jeweilige Position angegeben. Das Ganze wird auch als linearer Filter (\ref{eq:linearfilter}) bezeichnet. Die Koeffizienten der Gewichtungen werden mit einer Matrize (auch Kernel genannt) $h(k,l)$ beschrieben. Ein solcher Kernel kann wie folgt (\ref{eq:kernelexample}) aussehen. Dabei geben $m$ und $n$ die Grösse  und $h$ bzw. $l$ die jeweilige Komponente des Kernels an. Dies ist jedoch einer der einfachsten linearen Filter und würde lediglich das arithmetische Mittel der benachbarten Pixel berechnen.  \cite{opencv_bradski_kaehler:1, opencv_doc_blur:1}
 
 \begin{equation}
-	g(i,j) = \sum_{k,l} f(i+k,j+l)h(k,l)
+	g(i,j) = \sum_{k,l}^{m,n} f(i+k,j+l)h(k,l)
 	\label{eq:linearfilter}
 \end{equation}
 \cite{opencv_doc_blur:1}
@@ -31,7 +31,7 @@ Zu den häufigst angewendeten Bildbearbeitungsalgorithmen gehören Entschärfung
 
 
 \begin{equation}
-	h(k,l) = \frac{1}{k \cdot l}
+	h(k,l) = \frac{1}{m \cdot n}
 	\begin{bmatrix}
   	1      & 1      & 1      & \dots  &      1 \\
 	1      & 1      & 1      & \dots  &      1 \\
@@ -45,4 +45,34 @@ Zu den häufigst angewendeten Bildbearbeitungsalgorithmen gehören Entschärfung
 In der Praxis gibt es geeignetere Filter, um eine gewünschte Bildrausch Reduzierung zu erlangen. Einer der bekannteren wäre der Gaussian Blur, welcher die statistische Normalverteilung bzw. Gauss-Verteilung verwendet, um ein Mittel zu berechnen, benannt nach dem Mathematiker Carl Friedrich Gauss. \cite{carlfriedrichgauss:1}
 
 \subsubsection{Kantenerkennung (Edge detection)}
+\label{subsec:kanntenerkennung}
+
+Bilder bestehen oft aus einer Mehrzahl von Farben und Intensitäten. Wenn wir Menschen gefragt werden, die Kannten in einem Bild zu markieren oder nachzumalen, dann orientieren wir uns oft an abrupten Kontraständerungen. Die häufigst gebrauchten Algorithmen verwenden ein Verfahren welches auf einer ähnlichen Art und Weise funktioniert. Denn Mathematisch gesehen ist eine solche Kannte nichts anderes als eine schlagartige Änderung der Farb- und Intensitätswerten. Diese Änderungsrate kann über die erste Ableitung charakterisiert werden. Da sich die Pixel eines Bildes im zwei dimensionalen Raum befinden, verwendet man dafür einen Gradienten in $x$ und $y$ Richtung (\ref{eq:gradient}). Der Gradient weist jedem Pixel einen Vektor mit zwei Komponenten zu, wobei die Länge der Änderungsrate entspricht. Eine grosse Rate bedeutet einen abrupten Farb- bzw. Intensitätswechsel, was meistens auf eine Kante hinweist. Die Richtung des Vektors gibt dann die Senkrechte deren an. In der Praxis empfiehlt es sich aber ein schwarz-weiss Bild zu verwenden, denn dann gibt es nur einen Farbwert bzw. Helligkeitswert pro Pixel. Zudem ist es sinnvoll, bevor man versucht Kannten zu erkennen, das gewünschte Bild zu entschärfen, da Bildrauschen durch den Gradienten verstärkt wird. \cite{computervision_szeliski:2}
+
+\begin{equation}
+	\nabla I = \frac{\partial I}{\partial x} \vec{e_{x}} + \frac{\partial I}{\partial y} \vec{e_{y}}
+	\label{eq:gradient}
+\end{equation}
+\cite{computervision_szeliski:2}
+
+(Die beiden Vektoren $\vec{e_x}$ und $\vec{e_y}$ sind die Einheitsvektoren der jeweiligen Koordinatenachse) In der Realität werden oft komplexere Verfahren verwendet um den Gradienten zu berechnen, um Kannten zu erkennen (zB. Canny Algorithmus), doch man kann sich dem Gradienten auch annähern, indem man einen Scharr Filter über das Bild laufen lässt. Ein Scharr Filter ist eine Matrix bzw. ein Kernel und kann wie folgt aussehen (\ref{eq:scharrfilter}). \cite{computervision_szeliski:2}
+
+\begin{equation}
+	\begin{bmatrix}
+  	-3     & 0      & 3 \\
+	-10   & 0      & 10 \\
+	-3     & 0      & 3
+	\end{bmatrix}
+	\begin{bmatrix}
+  	-3     & -10   & -3\\
+	0      & 0      & 0\\
+	3      & 10    & 3
+	\end{bmatrix}	
+	\label{eq:scharrfilter}
+\end{equation}
+\cite{computervision_szeliski:2}
+
+Die beiden Matrizen werden dann ähnlich wie bei der Bildentschärfung (Siehe Kapitel \ref{subsec:kanntenerkennung}), um für jedes Pixel eine lokale, diskrete Änderungsrate in jeweils $x$ und $y$ Richtung zu berechnen (sprich einen angenäherten  Gradienten).
+
+
 
