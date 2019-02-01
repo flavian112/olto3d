@@ -1,18 +1,11 @@
 import numpy as np
-import cv2
-
-import matplotlib
-matplotlib.use('TkAgg')
-from matplotlib import pyplot as plt
 import collada
 
+# -----------------------
+# Helper Methods for Collada Export
+# -----------------------
 
-# verts = np.array([[1,2,1,3],
-#                   [1,2,2,1],
-#                   [1,1,1,1],
-#                   [0,0,0,0]])
-
-
+# Create 4x4 rotation matrix
 def mat_rotate(x,y,z):
 
     xr = np.array([[1, 0, 0, 0],
@@ -32,6 +25,7 @@ def mat_rotate(x,y,z):
 
     return np.matmul(np.matmul(xr, yr), zr)
 
+# Create 4x4 scalation matrix
 def mat_scale(x,y,z):
     xyzs = np.array([[x, 0, 0, 0],
                      [0, y, 0, 0],
@@ -40,7 +34,7 @@ def mat_scale(x,y,z):
 
     return xyzs
 
-
+# Create 4x4 translation matrix
 def mat_translate(x, y, z):
     xyzt = np.array([[1, 0, 0, x],
                      [0, 1, 0, y],
@@ -49,34 +43,36 @@ def mat_translate(x, y, z):
 
     return xyzt
 
+# Create terrain mesh from vertices
 def createTerrain(verts, mesh):
     effect = collada.material.Effect("terrain-effect0", [], "phong", diffuse=(0,1,0), specular=(0,0,0))
     mat = collada.material.Material("terrain-material0", "terrainMaterial", effect)
     mesh.effects.append(effect)
     mesh.materials.append(mat)
 
+    # reformat vertices array
     vert_arr = []
     for x in range(verts.shape[0]):
         for z in range(verts.shape[1]):
             y = verts[x][z]
 
-            vert_arr += [x, -y, -z]
+            vert_arr += [x, y, z]
 
 
     vert_floats =  vert_arr
 
-    # print(len(vert_arr)//3)
-    # print(vert_arr)
 
+    # Calculate Normals between vertices
     normal_arr = []
-
-
 
     for x in range(verts.shape[0]):
         for z in range(verts.shape[1]):
             y = verts[x][z]
 
-            if (x < verts.shape[0] - 1 and z < verts.shape[1] - 1):
+            # Each vertice has 3 normals connected to it
+            # Normal is vector between surrounding vertices
+
+            if (x < verts.shape[0] - 1 and z < verts.shape[1] - 1): # Case: Normals inside map
                 xn1 = x + 1
                 zn1 = z
                 yn1 = verts[xn1][zn1]
@@ -91,22 +87,19 @@ def createTerrain(verts, mesh):
 
                 normal_arr += [xn1, yn1, zn1, xn2, yn2, zn2, xn3, yn3, zn3]
 
-            elif (x == verts.shape[0] - 1 and z < verts.shape[1] - 1):
+            elif (x == verts.shape[0] - 1 and z < verts.shape[1] - 1): # Case: Normals at edge of map
                 xn3 = x
                 zn3 = z + 1
                 yn3 = verts[xn3][zn3]
 
                 normal_arr += [xn3, yn3, zn3]
 
-            elif(z == verts.shape[1] - 1 and x < verts.shape[0] - 1):
+            elif(z == verts.shape[1] - 1 and x < verts.shape[0] - 1): # Case: Normals at edge of map
                 xn1 = x + 1
                 zn1 = z
                 yn1 = verts[xn1][zn1]
 
                 normal_arr += [xn2, yn2, zn2]
-
-    # print(len(normal_arr)//3)
-    # print(normal_arr)
 
     normal_floats = normal_arr
 
@@ -117,11 +110,13 @@ def createTerrain(verts, mesh):
     input_list.addInput(0, 'VERTEX', "#terrain-verts-array")
     input_list.addInput(1, 'NORMAL', "#terrain-normals-array")
 
-    indices_arr = []
 
+    # calculate indices that collada knows which vertices and normals correspond together
+    # Normals and vertices of triangles must be saved as pairs. Each triangle consists of 3 vertices and 3 normals
+    indices_arr = []
     for x in range(verts.shape[0]):
         for z in range(verts.shape[1]):
-            if (x < verts.shape[0] - 2 and z < verts.shape[1] - 1):
+            if (x < verts.shape[0] - 2 and z < verts.shape[1] - 1): # Inside map case
                 iv1 = x*verts.shape[1]+ z
                 in1 = x*((verts.shape[1] - 1)*3 + 1) + z*(3) + 2
 
@@ -142,7 +137,7 @@ def createTerrain(verts, mesh):
 
                 indices_arr += [iv1, in1, iv2, in2, iv3, in3, iv4, in4, iv5, in5, iv6, in6]
 
-            elif (x < verts.shape[0] - 1 and z < verts.shape[1] - 1):
+            elif (x < verts.shape[0] - 1 and z < verts.shape[1] - 1): # Edge case
                 iv1 = x * verts.shape[1] + z
                 in1 = x * ((verts.shape[1] - 1) * 3 + 1) + z*(3) + 2
 
@@ -166,6 +161,7 @@ def createTerrain(verts, mesh):
 
     indices = np.array(indices_arr)
 
+    # Create triangles with data from above
     triset = geom.createTriangleSet(indices, input_list, "materialref")
     geom.primitives.append(triset)
     mesh.geometries.append(geom)
@@ -179,6 +175,7 @@ def createTerrain(verts, mesh):
     return mesh
 
 def createMesh():
+    # Create Colladamesh with empty root scene
 
     mesh = collada.Collada()
     rootscene = collada.scene.Scene("rootscene", [])
@@ -195,12 +192,11 @@ def loadMeshFromFile(path):
     return mesh
 
 def addNodeToMesh(mesh, nodes):
-
     mesh.scene.nodes += nodes
-
     return mesh
 
 def addRessourcesToMesh(mesh, meshRessources):
+    # Add ressources to mesh: Should only be run one per mesh Ressources
     mesh.scenes += meshRessources.scenes
     mesh.effects += meshRessources.effects
     mesh.materials += meshRessources.materials
@@ -211,7 +207,7 @@ def addRessourcesToMesh(mesh, meshRessources):
     return mesh
 
 
-
+# Add object node to mesh
 def addObjToMesh(mesh, obj, id, cords, scale=(1,1,1), rotation=(0,0,0)):
     xr, yr, zr, = rotation
     xs, ys, zs, = scale
@@ -234,50 +230,6 @@ def addObjToMesh(mesh, obj, id, cords, scale=(1,1,1), rotation=(0,0,0)):
     mesh.scene.nodes.append(objsnode)
     return mesh
 
-# def addTrees(cords, scale, rotation, mesh):
-#
-#     xr,yr,zr, = rotation
-#     #scale_tr  = collada.scene.ScaleTransform(scale,scale,scale)
-#     treesnode = collada.scene.Node("trees-0", children=[], transforms=[])
-#
-#
-#     for cord in cords:
-#         x,y,z = cord
-#         sid = "tree-" + str(x) + "-" + str(y) + "-" + str(z)
-#         #translation_tr = collada.scene.TranslateTransform(x/scale, -y/scale, -z/scale)
-#         transform = np.matmul(mat_rotate(xr,xy,xz), mat_scale())
-#         treenode = collada.scene.Node(sid, children=tree.scene.nodes, transforms=[scale_tr,translation_tr])
-#         treesnode.children.append(treenode)
-#
-#     mesh = addNodeToMesh(mesh, [treesnode])
-#
-#     return mesh
-#
-# def addCheckpoint(cords, scale, rotation, mesh):
-#     xr, yr, zr, a = rotation
-#     scale_tr  = collada.scene.ScaleTransform(scale,scale,scale)
-#     rotation_tr = collada.scene.RotateTransform(1,0,0, 180)
-#     checkpointsnode = collada.scene.Node("checkpoints-0", children=[], transforms=[])
-#
-#
-#     for cord in cords:
-#         x,y,z = cord
-#         sid = "checkpoint-" + str(x) + "-" + str(y) + "-" + str(z)
-#         translation_tr = collada.scene.TranslateTransform(x/scale, -y/scale, -z/scale)
-#         checkpointnode = collada.scene.Node(sid, children=checkpoint.scene.nodes, transforms=[scale_tr,rotation_tr, translation_tr])
-#         checkpointsnode.children.append(checkpointnode)
-#
-#     mesh = addNodeToMesh(mesh, [checkpointsnode])
-#
-#     return mesh
-
-tree = loadMeshFromFile('ressources/assets/tree1.dae')
-checkpoint = loadMeshFromFile('ressources/assets/checkpoint.dae')
-
-# mesh = createMesh()
-# mesh = createTerrain(verts, mesh)
-# mesh = addRessourcesToMesh(mesh, tree)
-# mesh = addTrees([(1,-2,-1)],mesh)
-#
-#
-# mesh.write('../test.dae')
+# Assets
+tree = loadMeshFromFile('../ressources/assets/tree1.dae')
+checkpoint = loadMeshFromFile('../ressources/assets/checkpoint.dae')
