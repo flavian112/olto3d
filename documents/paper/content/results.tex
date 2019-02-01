@@ -5,6 +5,7 @@
 Während dem Verarbeiten der OL-Karten und der Erstellung des 3D-Modells sind immer wieder Hürden aufgetaucht. Zum Teil konnten diese Hindernisse umgangen werden, jedoch gab es auch Probleme, zu denen noch keine Lösungen gefunden wurden. In den folgenden Abschnitten werden die schwierigsten Probleme besprochen, sowie allfällige Lösungen und Lösungsansätze diskutiert.
 
 \subsubsection{Isolinien Erkennung}
+\label{subsubsection:isolinien}
 
 \begin{wrapfigure}[17]{R}{0.3\textwidth}
 	\centering
@@ -40,7 +41,7 @@ Eine Möglichkeit wäre aber, vom Bildrand aus Senkrechten bis zum ersten Linien
 Noch eine Option wäre, mit Hilfe von externen Daten ein Höhendiagramm zu erlangen. Dazu gäbe es zum Beispiel Openstreetmap \cite{openstreetmap:1}. Dies ist ein online Karten Service wie Google Maps  \cite{googlemaps:1}, welcher aber eine online API zur verfügung stellt um Kartendaten wie, Höhenkurven herunterzuladen. Dazu müsste man aber wissen, was die genaue Geolocation (Koordinaten) der OL-Karte ist.
 
 
-\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{wrapfigure}[9]{R}{0.4\textwidth}
 	\centering
 	\includegraphics[width=0.35\textwidth]{\img curvestoheightmap.jpg}
 	\caption{Höhendiagramm aus Höhenkurven}
@@ -53,11 +54,17 @@ Sobald man die Isolinien in einem Stück hat, kann man ein Höhendiagramm anfert
 
 \newpage
 
-
-
-
-
-
 \subsection{Diskussion}
 
+Grundsätzlich war das Projekt ein Erfolg, denn die meisten meiner Ziele konnten erfüllt werden. Es gelang mir mit Hilfe eines Bildes der OL-Karten diverse Daten, wie bewaldete Regionen, Gewässer, OL-Posten, usw. zu extrahieren. Die Erkennung der Höhenkurven war mit den OL-Karten nicht möglich (Siehe Kapitel \ref{subsubsection:isolinien}), jedoch funktionierte dies  mit einem Testmodell, welches erfolgreich in ein 3D-Modell umgewandelt werden konnte.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=1\textwidth]{\img contourstomodel.jpg}
+	\caption{links: Höhenkurven rechts: 3D-Modell}
+	\label{fig:courvecompare}
+\end{figure}
+
 \subsection{Wie weiter?}
+
+Ein Fundament ist nun aufgebaut und es stellen sich viele interessante Ausbaumöglichkeiten zur Verfügung. Man könnte zum Beispiel noch mehr Objekte wie Sperrgebiete, usw. auf den OL-Karten erkennen. Eine andere Möglichkeit wäre, ein GUI (Graphische Benutzeroberfläche) zu erstellen, damit die Benutzerfreundlichkeit erhöht wird und das Ganze einladender aussehen würde. Neben all den kosmetischen Veränderungen und nachdem die Höhenkurven zuverlässig erkennt werden können, wäre es sinnvoll, das Programm in eine Smartphoneapp zu inkorporieren, denn solch ein Gerät trägt jeder mit sich und da bietet sich ein grosser Markt an.

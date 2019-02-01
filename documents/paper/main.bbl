@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{carlfriedrichgauss:1}
 Larry Freeman.
@@ -44,10 +44,24 @@ OpenCV Team.
   Sep 2018.
 \newblock Besucht am 3. Sep 2018.
 
+\bibitem{computergraphics:1}
+Tutorialspoint.
+\newblock Computer graphics.
+\newblock
+  \url{https://www.tutorialspoint.com/computer_graphics/3d_computer_graphics.htm},
+  2019.
+\newblock Besucht am 27. Jan 2019.
+
 \bibitem{opencv_bradski_kaehler:1}
 Gary~{Bradski} und Adrian~{Kaehler}.
 \newblock {\em Learning OpenCV - Computer Vision with the OpenCV Library},
   pages 2--7.
 \newblock O'REILLY, 2008.
+
+\bibitem{affinetransformation:1}
+Wikipedia.
+\newblock Affine transformation.
+\newblock \url{https://en.wikipedia.org/wiki/Affine_transformation}, Jan 2019.
+\newblock Besucht am 27. Jan 2019.
 
 \end{thebibliography}

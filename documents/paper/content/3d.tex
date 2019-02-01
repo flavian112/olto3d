@@ -1,5 +1,36 @@
 \section{3D}
 
+Ein Bild besteht örtlich gesehen aus zwei Dimensionen, der Breite und Höhe. Jeder Punkt dieses Bildes, also jedes Pixels hat einen genauen Ort, welcher durch einen Ortsvektor mit zwei Komponenten beschrieben werden kann. Wenn man eine dritte Koordinatenachse hinzufügt, zB. die Länge, dann spricht man vom drei dimensionalen Raum. Wiederum kann jeder Ort mit einem Ortsvektor beschrieben werden, aber im Gegensatz zum zwei dimensionalen Raum hat dieser drei Komponenten \cite{computergraphics:1}.
+
+Objekte im 3D-Raum werden an Hand von ihren Eckpunkten beschrieben und Flächen bestehen aus lauter kleiner Dreiecken, welche miteinander verbunden sind \cite{computergraphics:1}.
+
 \subsection{Transformationen}
 
-\subsection{Collada}
+Eine Transformation im 3D-Raum ist ein Vorgang, bei dem jedem Punkt $P$, auf den die Transformation angewendet wird, einen neuen Punkt im selben Koordinatensystem zugewiesen wird. Dazu gehören zum Beispiel Rotation, Translationen (Verschiebungen) und Skalierungen. Diese Transformationen werden mit einer Matrix charakterisiert. Um eine Transformation auf einen Punkt anzuwenden, wird der Ortsvektor des Punktes $\vec{OP}$ mit der Matrix multipliziert. Damit die Transformationen affin sind, dh. dass sie unter anderem umkehrbar sind und dass gerade Linien gerade bleiben \cite{affinetransformation:1}, wird der Punk mit einem Vektor mit vier Komponenten repräsentiert. Die Transformationen werden dann mit 4x4 Matrizen beschrieben (siehe  Translationsmatrix (\ref{eq:transform})) \cite{computergraphics:1}.
+
+\begin{equation}
+	\vec{OP} =
+	\begin{bmatrix}
+  	x \\
+	y\\
+	z\\
+	1
+	\end{bmatrix}
+	, \vec{OP}' =
+	\begin{bmatrix}
+  	1 & 0 & 0 & x_t\\
+	0 & 1 & 0 & y_t\\
+	0 & 0 & 1 & z_t\\
+	0 & 0 & 0 & 1\\
+	\end{bmatrix}
+	\begin{bmatrix}
+  	x \\
+	y\\
+	z\\
+	1
+	\end{bmatrix}
+	\label{eq:transform}
+\end{equation}
+\cite{computergraphics:1}
+
+Um die Transformation nicht nur auf einen einzelnen Punkt sondern ein ganzes Objekt anzuwenden, wird lediglich die Transformation auf jeden einzelnen Punkt des Objektes angewendet.

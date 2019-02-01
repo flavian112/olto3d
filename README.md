@@ -1,6 +1,8 @@
 # olto3d - Automatische Digitalisierung von OL-Karten
 Converting a orienteering sprint map into 3d (Collada .dae) format
 
+Paper: documents/paper/main.pdf
+
 ## Setup
 
 * install **pyenv**:
