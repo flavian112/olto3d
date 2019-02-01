@@ -1,12 +1,12 @@
 \section{3D}
 
-Ein Bild besteht örtlich gesehen aus zwei Dimensionen, der Breite und Höhe. Jeder Punkt dieses Bildes, also jedes Pixels hat einen genauen Ort, welcher durch einen Ortsvektor mit zwei Komponenten beschrieben werden kann. Wenn man eine dritte Koordinatenachse hinzufügt, zB. die Länge, dann spricht man vom drei dimensionalen Raum. Wiederum kann jeder Ort mit einem Ortsvektor beschrieben werden, aber im Gegensatz zum zwei dimensionalen Raum, hat dieser drei Komponenten \cite{computergraphics:1}.
+Ein Bild besteht örtlich gesehen aus zwei Dimensionen, der Breite und Höhe. Jeder Punkt dieses Bildes, also jedes Pixel hat einen genauen Ort, welcher durch einen Ortsvektor mit zwei Komponenten beschrieben werden kann. Wenn man eine dritte Koordinatenachse hinzufügt, zB. die Länge, dann spricht man vom drei dimensionalen Raum. Wiederum kann jeder Ort mit einem Ortsvektor beschrieben werden, aber im Gegensatz zum zwei dimensionalen Raum, hat dieser drei Komponenten \cite{computergraphics:1}.
 
-Objekte im 3D-Raum werden an Hand ihrer Eckpunkte beschrieben und Flächen bestehen aus lauter kleiner Dreiecken, welche miteinander verbunden sind \cite{computergraphics:1}.
+Objekte im 3D-Raum werden an Hand ihrer Eckpunkte beschrieben und Flächen bestehen aus lauter kleinen Dreiecken, welche miteinander verbunden sind \cite{computergraphics:1}.
 
 \subsection{Transformationen}
 
-Eine Transformation im 3D-Raum ist ein Vorgang, bei dem jedem Punkt $P$, auf den die Transformation angewendet wird, einen neuen Punkt im selben Koordinatensystem zugewiesen wird. Dazu gehören zum Beispiel Rotation, Translationen (Verschiebungen) und Skalierungen. Diese Transformationen werden mit einer Matrix charakterisiert. Um eine Transformation auf einen Punkt anzuwenden, wird der Ortsvektor des Punktes $\vec{OP}$ mit der Matrix multipliziert. Damit die Transformationen affin sind, dh. dass sie unter anderem umkehrbar sind und dass gerade Linien gerade bleiben \cite{affinetransformation:1}, wird der Punk mit einem Vektor mit vier Komponenten repräsentiert. Die Transformationen werden dann mit 4x4 Matrizen beschrieben (siehe  Translationsmatrix (\ref{eq:transform})) \cite{computergraphics:1}.
+Eine Transformation im 3D-Raum ist ein Vorgang, bei dem jedem Punkt $P$, auf den die Transformation angewendet wird, einen neuen Punkt im selben Koordinatensystem zugewiesen wird. Dazu gehören zum Beispiel Rotation, Translationen (Verschiebungen) und Skalierungen. Diese Transformationen werden mit einer Matrix charakterisiert. Um eine Transformation auf einen Punkt anzuwenden, wird der Ortsvektor des Punktes $\vec{OP}$ mit der Matrix multipliziert. Damit die Transformationen affin sind, d.h. dass sie unter anderem umkehrbar sind und dass gerade Linien gerade bleiben \cite{affinetransformation:1}, wird der Punk mit einem Vektor mit vier Komponenten repräsentiert. Die Transformationen werden dann mit 4x4 Matrizen beschrieben (siehe  Translationsmatrix (\ref{eq:transform})) \cite{computergraphics:1}.
 
 \begin{equation}
 	\vec{OP} =

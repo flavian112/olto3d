@@ -14,7 +14,7 @@ Während dem Verarbeiten der OL-Karten und der Erstellung des 3D-Modells sind im
 	\label{fig:photoexample}
 \end{wrapfigure}
 
-Eine der Hauptschwierigkeiten war die Erkennung der Isolinien (Höhenkurven). Gründe dafür sind zum einen die nicht perfekten Photoaufnahmen der OL-Karten selbst (Siehe Abbildung \ref{fig:photoexample}). Zum Teil kann dies aber behoben werden, in dem man eine Kamera mit höherer Auflösung verwendet, oder man einen Scanner benutzt. Ausserdem muss man beachten, dass die meisten Photoaufnahmegeräte die Auflösung und Qualität eines Bildes automatisch verringern, um dessen Dateigrössen zu minimieren. Dies kann jedoch häufig in den Einstellung des jeweiligen Gerätes verstellt oder ausgeschalten werden. Für dieses Projekt wurden die OL-Karten mit einem Scanner digitalisiert und danach als JPEG (Bilddateiformat) mit einer Auflösung von 2408x3436 Pixel abgespeichert. 
+Eine der Hauptschwierigkeiten war die Erkennung der Isolinien (Höhenkurven). Gründe dafür sind zum einen die nicht perfekten Photoaufnahmen der OL-Karten selbst (Siehe Abbildung \ref{fig:photoexample}). Zum Teil kann dies aber behoben werden, indem man eine Kamera mit höherer Auflösung verwendet, oder man einen Scanner benutzt. Ausserdem muss man beachten, dass die meisten Photoaufnahmegeräte die Auflösung und Qualität eines Bildes automatisch verringern, um dessen Dateigrössen zu minimieren. Dies kann jedoch häufig in den Einstellung des jeweiligen Gerätes verstellt oder ausgeschaltet werden. Für dieses Projekt wurden die OL-Karten mit einem Scanner digitalisiert und danach als JPEG (Bilddateiformat) mit einer Auflösung von 2408x3436 Pixel abgespeichert. 
 
 
 
@@ -38,7 +38,7 @@ Eine weitere Ursache ist, dass die Höhenkurven auf den OL-Karten durch Flüsse 
 
 Eine Möglichkeit wäre aber, vom Bildrand aus Senkrechten bis zum ersten Linienabschnitt zu ziehen und dann von dort aus wieder eine Senkrechte zum nächsten Abschnitt zu berechnen, usw. Somit könnte man einen Gradienten konstruieren, um von diesem aus auf ein Höhendiagramm zu kommen.
 
-Noch eine Option wäre, mit Hilfe von externen Daten ein Höhendiagramm zu erlangen. Dazu gäbe es zum Beispiel Openstreetmap \cite{openstreetmap:1}. Dies ist ein online Karten Service wie Google Maps  \cite{googlemaps:1}, welcher aber eine online API zur verfügung stellt um Kartendaten wie, Höhenkurven herunterzuladen. Dazu müsste man aber wissen, was die genaue Geolocation (Koordinaten) der OL-Karte ist.
+Noch eine Option wäre, mit Hilfe von externen Daten ein Höhendiagramm zu erlangen. Dazu gäbe es zum Beispiel Openstreetmap \cite{openstreetmap:1}. Dies ist ein online Karten Service wie Google Maps  \cite{googlemaps:1}, welcher aber eine online API zur Verfügung stellt, um Kartendaten wie Höhenkurven herunterzuladen. Dazu müsste man aber wissen, was die genaue Geolocation (Koordinaten) der OL-Karte ist.
 
 
 \begin{wrapfigure}[9]{R}{0.4\textwidth}
@@ -50,7 +50,7 @@ Noch eine Option wäre, mit Hilfe von externen Daten ein Höhendiagramm zu erlan
 
 \newpage
 
-Sobald man die Isolinien in einem Stück hat, kann man ein Höhendiagramm anfertigen. Zum Testen wurden ein paar Kurven gezeichnet und als JPEG gespeichert, welche dann erfolgreich vom Programm erkannt wurden und dann in ein Höhendiagramm verarbeitet werden konnten (Siehe Abbildung \ref{fig:curvestoheightmap}). Dies ist nur ein Beispiel, zum zeigen, dass dies überhaupt möglich ist (proof of concept).
+Sobald man die Isolinien in einem Stück hat, kann man ein Höhendiagramm anfertigen. Zum Testen wurden ein paar Kurven gezeichnet und als JPEG gespeichert, welche dann erfolgreich vom Programm erkannt wurden und dann in ein Höhendiagramm verarbeitet werden konnten (Siehe Abbildung \ref{fig:curvestoheightmap}). Dies ist nur ein Beispiel zum Zeigen, dass dies überhaupt möglich ist (proof of concept).
 
 \newpage
 
@@ -74,4 +74,4 @@ Grundsätzlich war das Projekt ein Erfolg, denn die meisten meiner Ziele konnten
 
 \subsection{Wie weiter?}
 
-Ein Fundament ist nun aufgebaut und es stellen sich viele interessante Ausbaumöglichkeiten zur Verfügung. Man könnte zum Beispiel noch mehr Objekte wie Sperrgebiete, usw. auf den OL-Karten erkennen. Eine andere Möglichkeit wäre, ein GUI (Graphische Benutzeroberfläche) zu erstellen, damit die Benutzerfreundlichkeit erhöht wird und das Ganze einladender aussehen würde. Neben all den kosmetischen Veränderungen und nachdem die Höhenkurven zuverlässig erkennt werden können, wäre es sinnvoll, das Programm in eine Smartphoneapp zu inkorporieren, denn solch ein Gerät trägt jeder mit sich und da bietet sich ein grosser Markt an.
+Ein Fundament ist nun aufgebaut und es stellen sich viele interessante Ausbaumöglichkeiten zur Verfügung. Man könnte zum Beispiel noch mehr Objekte wie Sperrgebiete, usw. auf den OL-Karten erkennen. Eine andere Möglichkeit wäre, ein GUI (Graphische Benutzeroberfläche) zu erstellen, damit die Benutzerfreundlichkeit erhöht wird und das Ganze einladender aussehen würde. Neben all den kosmetischen Veränderungen und nachdem die Höhenkurven zuverlässig erkennt werden können, wäre es sinnvoll, das Programm in eine Smartphoneapp einzubetten, denn solch ein Gerät trägt jeder mit sich und da bietet sich ein grosser Markt an.
